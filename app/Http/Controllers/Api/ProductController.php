@@ -44,7 +44,38 @@ class ProductController extends Controller
             'name' => $validatedData['name'],
             'description' => $validatedData['description'],
             'price' => $validatedData['price'],
-            'category_id' => $validatedData['category'], // Use the category ID from the validated data
+            'category_id' => $validatedData['category'],
         ]);
+        return redirect('/products')->with('success','product added successfully');
+    }
+    public function edit(Product $product)
+    {
+        $categories=Category::all();
+        return view('updateProduct',compact('product','categories'));
+    }
+    public function update(Request $request,Product $product)
+    {
+        // dd($request);
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description'=>'required',
+            'price' => 'required|numeric',
+            'category' => 'required', // Ensure the category exists
+            // Add other fields as necessary
+        ],[
+            'name.required' => 'name is required',
+            'price.required' => 'price is required',
+            'description.required'=>'description is required',
+            'category.required' => 'Category is required',
+        ]);
+        $product->update($validatedData);
+        return redirect('/products')->with('success','product updated successfully');
+    }
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return redirect('/products')->with('success','product deleted successfully');
     }
 }
+
+

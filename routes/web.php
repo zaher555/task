@@ -10,13 +10,13 @@ use Laravel\Sanctum\Sanctum;
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware('auth:sanctum');
+})->middleware('auth');
 Route::get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:sanctum');
-Route::resource('/products', ProductController::class)->middleware('auth:sanctum');
+})->middleware('auth');
+Route::resource('/products', ProductController::class)->middleware('auth');
 
-Route::resource('/categories', CategoryController::class)->middleware('auth:sanctum');
+Route::resource('/categories', CategoryController::class)->middleware('auth');
 
 Route::get('/login', function () {
     return view('login');

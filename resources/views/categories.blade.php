@@ -11,27 +11,23 @@
     @if(session('success'))
         <p class="alert alert-success">{{ session('success') }}</p>
     @endif
-    <a class="btn btn-success" href="/products/create">add product</a>
+    <a class="btn btn-success" href="/categories/create">add category</a>
     <table class="table">
         <thead>
           <tr>
             <th scope="col">name</th>
             <th scope="col">description</th>
-            <th scope="col">price</th>
-            <th scope="col">cat_Id</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-        @foreach($products as $product)
+        @foreach($categories as $category)
           <tr>
-            <td>{{$product->name}}</td>
-            <td>{{$product->description}}</td>
-            <td>{{$product->price}}</td>
-            <td>{{$product->category_id}}</td>
+            <td>{{$category->name}}</td>
+            <td>{{$category->description}}</td>
             <td>
-                <a class="btn btn-warning" href="/products/{{$product->id}}/edit">edit</a>
-                <form method="POST" action="/products/{{$product->id}}">
+                <a class="btn btn-warning" href="/categories/{{$category->id}}/edit">edit</a>
+                <form method="POST" action="/categories/{{$category->id}}">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger" type="submit">

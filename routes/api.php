@@ -15,7 +15,9 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 Route::resource('/products', ProductController::class)->middleware('auth:sanctum');
+
 Route::resource('/categories', CategoryController::class)->middleware('auth:sanctum');
+
 Route::get('/login', function () {
     return view('login');
 });
